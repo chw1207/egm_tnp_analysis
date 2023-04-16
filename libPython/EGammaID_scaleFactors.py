@@ -95,15 +95,15 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
     
     
     p1 = rt.TPad( canName + '_up', canName + '_up', 0, yUp, 1,   1, 0,0,0)
-    p2 = rt.TPad( canName + '_do', canName + '_do', 0,   0, 1, yUp, 0,0,0)
-    p1.SetBottomMargin(0.0075)
+    p2 = rt.TPad( canName + '_do', canName + '_do', 0,   0, 1, yUp-0.001, 0,0,0)
+    p1.SetBottomMargin(0.04)
     p1.SetTopMargin(   c.GetTopMargin()*1/(1-yUp))
     p2.SetTopMargin(   0.0075)
     p2.SetBottomMargin( c.GetBottomMargin()*1/yUp)
     p1.SetLeftMargin( c.GetLeftMargin() )
     p2.SetLeftMargin( c.GetLeftMargin() )
     firstGraph = True
-    leg = rt.TLegend(0.5,0.80,0.95 ,0.92)
+    leg = rt.TLegend(0.5,0.82,0.95 ,0.94)
     leg.SetFillColor(0)
     leg.SetBorderSize(0)
 
@@ -132,8 +132,8 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
     effminmax =  findMinMax( effDataList )
     effiMin = effminmax[0]
     effiMax = effminmax[1]
-    effiMin = 0.18
-    effiMax = 1.35
+    effiMin = 0
+    effiMax = 1.4
 
     sfminmax =  findMinMax( sfList )
     sfMin = sfminmax[0]
@@ -161,6 +161,7 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
         grBinsEffData.GetHistogram().SetMinimum(effiMin)
         grBinsEffData.GetHistogram().SetMaximum(effiMax)
 
+        grBinsEffData.GetHistogram().GetXaxis().SetLabelOffset(0.1)
         grBinsEffData.GetHistogram().GetXaxis().SetLimits(xMin,xMax)
         grBinsSF.GetHistogram()     .GetXaxis().SetLimits(xMin,xMax)
         grBinsSF.GetHistogram().SetMinimum(sfMin)
@@ -334,7 +335,7 @@ def doEGM_SFs(filein, lumi, axis = ['pT','eta'] ):
     cDummy.Print( pdfout + "[" )
 
 
-    EffiGraph1D( effGraph.pt_1DGraph_list_customEtaBining(customEtaBining, False ) , #eff Data
+    EffiGraph1D( effGraph.pt_1DGraph_list_customEtaBining(customEtaBining, False ) , # eff Data
                  None, 
                  effGraph.pt_1DGraph_list_customEtaBining(customEtaBining, True ) , #SF
                  pdfout,

@@ -189,7 +189,7 @@ if args.sumUp:
         'mcAlt'       : None,
         'tagSel'      : None
         }
-
+    print(sampleToFit.mcRef.histFile)
     if not tnpConf.samplesDef['mcAlt' ] is None:
         info['mcAlt'    ] = tnpConf.samplesDef['mcAlt' ].histFile
     if not tnpConf.samplesDef['tagSel'] is None:
@@ -200,7 +200,6 @@ if args.sumUp:
     fOut = open( effFileName,'w')
     
     for ib in range(len(tnpBins['bins'])):
-        effis = tnpRoot.getAllEffi( info, tnpBins['bins'][ib] )
 
         ### formatting assuming 2D bining -- to be fixed        
         v1Range = tnpBins['bins'][ib]['title'].split(';')[1].split('<')
@@ -212,7 +211,8 @@ if args.sumUp:
             astr = '### var2 : %s' % v2Range[1]
             print astr
             fOut.write( astr + '\n' )
-            
+        
+        effis = tnpRoot.getAllEffi( info, tnpBins['bins'][ib] )
         astr =  '%+8.3f\t%+8.3f\t%+8.3f\t%+8.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f' % (
             float(v1Range[0]), float(v1Range[2]),
             float(v2Range[0]), float(v2Range[2]),

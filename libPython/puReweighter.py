@@ -230,38 +230,40 @@ puMC = {
 #puMCscenario = 'Spring2016MC_PUscenarioV1'
 #puMCscenario = 'mix_2017_25ns_UltraLegacy_PoissonOOTPU'
 #puMCscenario = 'mix_2018_25ns_UltraLegacy_PoissonOOTPU'
-puMCscenario = 'mix_2016_25ns_UltraLegacy_PoissonOOTPU'
-customWeightsName= 'weights'
+# puMCscenario = 'mix_2016_25ns_UltraLegacy_PoissonOOTPU'
+# customWeightsName= 'weights'
 ###puDirEOS = '/eos/cms/store/group/phys_egamma/swmukher/ntuple_2017/PU/'
 #puDirEOS = '/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_01162018/PU/'
 #puDirEOS = '/eos/cms/store/group/phys_egamma/asroy/Tag-and-Probe_Tree/UL2018_PUData/'
-puDirEOS = '/eos/cms/store/group/phys_egamma/asroy/Tag-and-Probe_Tree/UL2016_PUData/'
+# cms_base = os.environ["CMSSW_BASE"]
+# puDirEOS = '{}/src/egm_tnp_analysis/pileup/'.format(cms_base)
 
 
 #### Compute weights for all data epoch specified below
-puDataEpoch = {
-    '2016_runBCD' : puDirEOS + 'pu_dist_runBCD_692.root',
-    '2016_runEF' : puDirEOS + 'pu_dist_runEF_692.root',
-    '2016_runGH' : puDirEOS + 'pu_dist_runGH_692.root',
-    '2016_run2016' : puDirEOS + 'pu_dist_run2016_692.root',
-    }
-'''
-puDataEpoch = {
-    '2018_runA' : puDirEOS + 'pileup_2018_RunA.root',
-    '2018_runB' : puDirEOS + 'pileup_2018_RunB.root',
-    '2018_runC' : puDirEOS + 'pileup_2018_RunC.root',
-    '2018_runD'  : puDirEOS +'pileup_2018_RunD.root' ,
-    '2018_runABCD' : puDirEOS + 'pileup_2018_RunABCD.root',
-    }
-puDataEpoch = {
-    '2017_runB' : puDirEOS + 'pileup_2017_RUNB.root',
-    '2017_runC' : puDirEOS + 'pileup_2017_RUNC.root',
-    '2017_runD'  : puDirEOS +'pileup_2017_RUND.root' ,
-    '2017_runE'  : puDirEOS +'pileup_2017_RUNE.root' ,
-    '2017_runF' : puDirEOS + 'pileup_2017_RUNF.root',    
-    '2017_runBCDEF' : puDirEOS + 'pileup_2017_41fb.root',
-    }
-'''
+# puDataEpoch = {
+#     # '2016_runBCD' : puDirEOS + 'pu_dist_runBCD_692.root',
+#     # '2016_runEF' : puDirEOS + 'pu_dist_runEF_692.root',
+#     # '2016_runGH' : puDirEOS + 'pu_dist_runGH_692.root',
+#     # '2016_run2016' : puDirEOS + 'pu_dist_run2016_692.root',
+#     '2016_run2016' : puDirEOS + 'UL2016postVFP/UL2016postVFP_DATAPU_GoldenJSON_69200nb.root',
+#     }
+
+# puDataEpoch = {
+#     '2018_runA' : puDirEOS + 'pileup_2018_RunA.root',
+#     '2018_runB' : puDirEOS + 'pileup_2018_RunB.root',
+#     '2018_runC' : puDirEOS + 'pileup_2018_RunC.root',
+#     '2018_runD'  : puDirEOS +'pileup_2018_RunD.root' ,
+#     '2018_runABCD' : puDirEOS + 'pileup_2018_RunABCD.root',
+#     }
+# puDataEpoch = {
+#     # '2017_runB' : puDirEOS + 'pileup_2017_RUNB.root',
+#     # '2017_runC' : puDirEOS + 'pileup_2017_RUNC.root',
+#     # '2017_runD'  : puDirEOS +'pileup_2017_RUND.root' ,
+#     # '2017_runE'  : puDirEOS +'pileup_2017_RUNE.root' ,
+#     # '2017_runF' : puDirEOS + 'pileup_2017_RUNF.root',    
+#     '2017_runBCDEF' : puDirEOS + 'PileupHistogram-goldenJSON-13tev-2017-69200ub-99bins.root',
+#     }
+
 nVtxDataEpoch = {
     '2016_runBCD' : 'etc/inputs/nVtx_2016_runBCD.root',
     '2016_runEF'  : 'etc/inputs/nVtx_2016_runEF.root' ,
@@ -277,7 +279,36 @@ rhoDataEpoch = {
 
 
 
-def reweight( sample, puType = 0,useCustomW=False  ):
+def reweight(sample, era, puType=0,useCustomW=False):
+    puMCscenario = ''
+    if "UL2016" in era:
+        puMCscenario = 'mix_2016_25ns_UltraLegacy_PoissonOOTPU'
+    elif "UL2017" in era:
+        puMCscenario = 'mix_2017_25ns_UltraLegacy_PoissonOOTPU'
+    else:
+        puMCscenario = 'mix_2018_25ns_UltraLegacy_PoissonOOTPU'
+    
+    customWeightsName= 'weights'
+    cms_base = os.environ["CMSSW_BASE"]
+    puDirEOS = '{}/src/egm_tnp_analysis/pileup/'.format(cms_base)
+    
+    if era == "UL2016preVFP":
+        puDataEpoch = {
+            '2016_run2016' : puDirEOS + 'PileupHistogram-goldenJSON-13tev-2016-preVFP-69200ub-99bins.root',
+        }
+    elif era == "UL2016postVFP":
+        puDataEpoch = {
+            '2016_run2016' : puDirEOS + 'PileupHistogram-goldenJSON-13tev-2016-postVFP-69200ub-99bins.root',
+        }
+    elif era == "UL2017":
+        puDataEpoch = {
+            '2017_runBCDEF' : puDirEOS + 'PileupHistogram-goldenJSON-13tev-2017-69200ub-99bins.root',
+        }
+    else:
+        puDataEpoch = {
+            '2018_runABCD' : puDirEOS + 'PileupHistogram-goldenJSON-13tev-2018-69200ub-99bins.root',
+        }
+    
     if sample.path is None:
         print '[puReweighter]: Need to know the MC tree (option --mcTree or sample.path)'
         sys.exit(1)
@@ -339,7 +370,7 @@ def reweight( sample, puType = 0,useCustomW=False  ):
         fpu.Close()
         weights[pu] = []
 
-    mcEvts = tree2array( tmc, branches = ['weight','truePU','event_nPV','rho'] )
+    mcEvts = tree2array( tmc, branches = ['weight','truePU','event_nPV','event_rho'] )
 
 
     pumc = puMC[puMCscenario]

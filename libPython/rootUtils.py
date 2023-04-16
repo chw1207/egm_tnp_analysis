@@ -90,9 +90,15 @@ def histPlotter( filename, tnpBin, plotDir ):
 
 def computeEffi( n1,n2,e1,e2):
     effout = []
-    eff   = n1/(n1+n2)
-    e_eff = 1/(n1+n2)*math.sqrt(e1*e1*n2*n2+e2*e2*n1*n1)/(n1+n2)
-    if e_eff < 0.001 : e_eff = 0.001
+    if (n1+n2) > 0:
+        eff   = n1/(n1+n2)
+        e_eff = 1/(n1+n2)*math.sqrt(e1*e1*n2*n2+e2*e2*n1*n1)/(n1+n2)
+        if eff < 0.001 : eff = 0.001
+        if e_eff < 0.001 : e_eff = 0.001
+    else:
+        print("[Warning] Npass + Nfail = 0! Set the eff to 1. temporarily")
+        eff   = 1.
+        e_eff = 0.
 
     effout.append(eff)
     effout.append(e_eff)
@@ -107,6 +113,7 @@ def getAllEffi( info, bindef ):
         rootfile = rt.TFile( info['mcNominal'], 'read' )
         hP = rootfile.Get('%s_Pass'%bindef['name'])
         hF = rootfile.Get('%s_Fail'%bindef['name'])
+        
         #bin1 = 1
         #bin2 = hP.GetXaxis().GetNbins()
         bin1 = 11
