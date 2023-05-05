@@ -10,7 +10,7 @@ flags = {
     'passingDiPhoHLTUnSeed' : '(passHltDiphoton3018UnseededLastFilter == 1)'
     }
 
-baseOutDir = 'results/UL2016_postVFP/tnpEleTrig-final/'
+baseOutDir = 'results/UL2016_postVFP/tnpEleTrig-final-update/'
 
 #############################################################
 ########## samples definition  - preparing the samples
@@ -69,9 +69,9 @@ if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/data4/che
 ########## bining definition  [can be nD bining]
 #############################################################
 biningDef = [
-   { 'var' : 'el_sc_eta' , 'type': 'float', 'bins': [-2.5,-2.0,-1.566,-1.4442, -0.8, 0.0, 0.8, 1.4442, 1.566, 2.0, 2.5] },
+   { 'var' : 'el_sc_eta' , 'type': 'float', 'bins': [-2.5, -2.0, -1.566, -1.4442, -0.8, 0.0, 0.8, 1.4442, 1.566, 2.0, 2.5] },
 #   { 'var' : 'el_pt' , 'type': 'float', 'bins': [10,20,35,50,100,500] },
-   { 'var' : 'el_pt' , 'type': 'float', 'bins': [10, 18, 25, 35, 50, 100, 500] },
+   { 'var' : 'el_pt' , 'type': 'float', 'bins': [10, 18, 25, 35, 45, 60, 500] },
 
 
 ]

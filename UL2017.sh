@@ -1,4 +1,5 @@
 #!/bin/sh
+export PYTHONPATH=$PYTHONPATH:$CMSSW_BASE/src/egm_tnp_analysis
 
 python tnpEGM_fitter.py etc/config/settings_ele_UL2017_DiPhoHLTUnSeed.py --flag passingDiPhoHLTUnSeed --checkBins
 python tnpEGM_fitter.py etc/config/settings_ele_UL2017_DiPhoHLTUnSeed.py --flag passingDiPhoHLTUnSeed --createBins

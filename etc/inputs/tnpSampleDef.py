@@ -15,11 +15,17 @@ eosReReco2018 = '/eos/cms/store/group/phys_egamma/swmukher/rereco2018/ECAL_NOISE
 # eosUL2018 = '/eos/cms/store/group/phys_egamma/asroy/Tag-and-Probe_Tree/UL2018_MINIAOD_Nm1/'
 # eosUL2016 = '/eos/cms/store/group/phys_egamma/akapoor/Tag-and-Probe_Tree/UL2016_ntuples/'
 
+# Unseeded leg 
 eosUL2017 = "/data4/chenghan/tnpTuples-unseedDiPhoHLT/UL2017_merged/"
 eosUL2018 = '/data4/chenghan/tnpTuples-unseedDiPhoHLT/UL2018_merged/'
 eosUL2016postVFP = "/data4/chenghan/tnpTuples-unseedDiPhoHLT/UL2016postVFP_merged/"
 eosUL2016preVFP = '/data4/chenghan/tnpTuples-unseedDiPhoHLT/UL2016preVFP_merged/'
 
+# Seeded leg 
+# eosUL2017 = "/data4/chenghan/tnpTuples-seedDiPhoHLT/UL2017_merged/"
+# eosUL2018 = '/data4/chenghan/tnpTuples-seedDiPhoHLT/UL2018_merged/'
+# eosUL2016postVFP = "/data4/chenghan/tnpTuples-seedDiPhoHLT/UL2016postVFP_merged/"
+# eosUL2016preVFP = '/data4/chenghan/tnpTuples-seedDiPhoHLT/UL2016preVFP_merged/'
 
 ReReco2017 = {
 
